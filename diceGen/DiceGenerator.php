@@ -1,5 +1,5 @@
 <?php
-namespace Fabian\Test;
+namespace Fabian\Test\diceGen;
 
 class DiceGenerator
 {

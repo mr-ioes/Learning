@@ -1,6 +1,6 @@
 <?php
 
-namespace Fabian\Test;
+namespace Fabian\Test\diceGen;
 
 class Rng implements IRng
 {

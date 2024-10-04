@@ -1,7 +1,7 @@
 <?php
 namespace Fabian\Test\tests;
-use Fabian\Test\DiceGenerator;
-use Fabian\Test\IRng;
+use Fabian\Test\diceGen\DiceGenerator;
+use Fabian\Test\diceGen\IRng;
 use PHPUnit\Framework\MockObject\Exception;
 use PHPUnit\Framework\TestCase;
 
