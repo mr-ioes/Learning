@@ -3,45 +3,45 @@ namespace Fabian\Test\diceGen;
 
 class DiceGenerator
 {
-    private array $diceCountPerDiceArray = array();
+    private array $diceScorePerDiceInArray = array();
 
     public function __construct(private readonly IRng $rng,
                                 private readonly bool $usesExplodingSix = false)
     {
     }
 
-    public function getDiceThrowsAsArray() : array
+    public function getDiceScorePerDiceAsArray() : array
     {
-        return $this->diceCountPerDiceArray;
+        return $this->diceScorePerDiceInArray;
     }
 
-    public function getTotalCount(): int
+    public function getTotalScoreForAllDices(): int
     {
-        $totalCount = 0;
-        foreach ($this->diceCountPerDiceArray as $diceCount) {
-            $totalCount += $diceCount;
+        $totalDiceScore = 0;
+        foreach ($this->diceScorePerDiceInArray as $diceScore) {
+            $totalDiceScore += $diceScore;
         }
-        return $totalCount;
+        return $totalDiceScore;
     }
 
     public function execute(int $diceAmount): void
     {
         for ($i = 0; $i < $diceAmount; $i++) {
             if ($this->usesExplodingSix) {
-                $count = $this->explodingSix();
+                $diceScore = $this->explodingSix();
             }
             else {
-                $count = $this->rng->randomSix();
+                $diceScore = $this->rng->randomSix();
             }
 
             //adding diceScores to array
-            $this->diceCountPerDiceArray[] = $count;
+            $this->diceScorePerDiceInArray[] = $diceScore;
         }
     }
 
     public function hasHigherOrEqual(int $threshold): bool
     {
-        foreach ($this->diceCountPerDiceArray as $value) {
+        foreach ($this->diceScorePerDiceInArray as $value) {
             if ($value >= $threshold) {
                 return true;
             }
@@ -51,10 +51,10 @@ class DiceGenerator
 
     private function explodingSix(): int
     {
-        $count = 0;
-        while ($count % 6 == 0) {
-            $count += $this->rng->randomSix();
+        $diceScore = 0;
+        while ($diceScore % 6 == 0) {
+            $diceScore += $this->rng->randomSix();
         }
-        return $count;
+        return $diceScore;
     }
 }
