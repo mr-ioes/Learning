@@ -23,6 +23,6 @@ export default class TodoController {
         const todos = this._model.getTodos();
         this._view.render(todos);
 
-        window.alert("render!") // delete it
+        //window.alert("render!") // delete it
     }
 }
