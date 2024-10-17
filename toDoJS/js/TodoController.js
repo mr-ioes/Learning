@@ -1,3 +1,6 @@
+import TodoView from "./TodoView.js";
+import TodoModel from "./TodoModel.js";
+
 export default class TodoController {
     _model = null;
     _view = null;
@@ -6,17 +9,28 @@ export default class TodoController {
         this._model = model;
         this._view = view;
 
+        this._view.onItemClick = this.onItemClick.bind(this);
+        this._model.onToDoUpdated = this.renderTodos.bind(this);
+
         // connect listeners
 
         this.renderTodos();
     }
 
-    onItemClick() {
-        //
+    onItemClick(id) {
+        this._model.toggleTodo(id)
     }
 
-    onNewItemSubmit() {
-        //
+    onNewItemSubmit(toDoText) {
+        this._model.addTodo(toDoText)
+    }
+
+    onItemRemove(id) {
+        this._model.removeTodo(id);
+    }
+
+    onItemToggle(id) {
+        this._model.toggleTodo(id);
     }
 
     renderTodos() {
