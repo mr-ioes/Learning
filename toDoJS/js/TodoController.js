@@ -10,6 +10,8 @@ export default class TodoController {
         this._view = view;
 
         this._view.onItemClick = this.onItemClick.bind(this);
+        this._view.onNewItemSubmit = this.onNewItemSubmit.bind(this);
+        this._view.onItemDoubleClick = this.onItemRemove.bind(this);
         this._model.onToDoUpdated = this.renderTodos.bind(this);
 
         // connect listeners
@@ -29,14 +31,8 @@ export default class TodoController {
         this._model.removeTodo(id);
     }
 
-    onItemToggle(id) {
-        this._model.toggleTodo(id);
-    }
-
     renderTodos() {
         const todos = this._model.getTodos();
         this._view.render(todos);
-
-        //window.alert("render!") // delete it
     }
 }

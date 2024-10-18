@@ -19,19 +19,31 @@ export default class TodoModel {
     }
 
     addTodo(toDoText) {
+        let idFilter = 0;
+        for (const todo of this._todos) {
+            if (todo.id > idFilter)
+                idFilter = todo.id;
+        }
         const todo = {
-            id: this._todos.length,
+            id: idFilter + 1,
             topic: toDoText,
             isDone: false,
         }
         this._todos.push(todo);
+        this._updateLocalStorage();
+        this.onToDoUpdated();
     }
 
     removeTodo(id) {
-        // delete item by id in array
-        const objectToDelete = this._todos.findIndex((obj) => obj.id === id);
-        this._todos = this._todos.splice(objectToDelete, 1);
-    }
+        for (let i = this._todos.length - 1; i >= 0; --i) {
+            if (this._todos[i].id === id) {
+                this._todos.splice(i, 1);
+            }
+        }
+        this._updateLocalStorage();
+        this.onToDoUpdated();
+
+}
 
     toggleTodo(id) {
         // toggle item
